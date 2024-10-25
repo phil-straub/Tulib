@@ -78,6 +78,15 @@ static inline int tulib_enc_is_ascii(const char8_t * enc) {return (tulib_enc_is_
 static inline int tulib_char_is_multibyte(tulib_char ch) {return (tulib_char_is_valid(ch) > 1);}
 static inline int tulib_enc_is_multibyte(const char8_t * enc) {return (tulib_enc_is_valid(enc) > 1);}
 
+/*
+ * Loop Macro
+ *
+ * (for null-terminated strings)
+ */
+
+#define tulib_for(enc, str)                                                                         \
+    for (enc = str; enc[0] && tulib_enc_is_valid(enc); enc += tulib_enc_width(enc))
+
 /****************************************************************************************************
  *
  * Implementation of Some Longer Functions
